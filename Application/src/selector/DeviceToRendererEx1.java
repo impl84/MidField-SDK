@@ -1,5 +1,5 @@
 
-package performer.ex1;
+package selector;
 
 import java.io.IOException;
 
@@ -11,19 +11,19 @@ import util.SimpleViewer;
 
 //------------------------------------------------------------------------------
 /**
- * Sample code of MidField System API: StreamToStreamEx1
- *
+ * Sample code of MidField System API: DeviceToRendererEx1
+ * 
  * Date Modified: 2020.10.02
  *
  */
 
 //==============================================================================
-public class StreamToStreamEx1
+public class DeviceToRendererEx1
 	extends	AbstractSampleCode
 {
 	//- PRIVATE CONSTANT VALUE -------------------------------------------------
 	private static final String
-		DESCRIPTION	= "Incoming Stream -> Outgoing Stream";
+		DESCRIPTION	= "Device -> Renderer";
 	
 //==============================================================================
 //  CLASS METHOD:
@@ -50,7 +50,7 @@ public class StreamToStreamEx1
 			viewer = new SimpleViewer(DESCRIPTION);
 			
 			// AbstractSampleCode のインスタンスを生成して処理を開始する．
-			sample = new StreamToStreamEx1(viewer);
+			sample = new DeviceToRendererEx1(viewer);
 			sample.startup();			// SystemException, StreamException
 			
 			// Enterキーの入力を待つ．
@@ -80,7 +80,7 @@ public class StreamToStreamEx1
 //==============================================================================
 //  INSTANCE METHOD:
 //==============================================================================
-	
+
 //------------------------------------------------------------------------------
 //  PUBLIC METHOD:
 //------------------------------------------------------------------------------	
@@ -88,31 +88,31 @@ public class StreamToStreamEx1
 	//- PUBLIC METHOD ----------------------------------------------------------
 	// コンストラクタ
 	//
-	public StreamToStreamEx1(SimpleViewer viewer)
+	public DeviceToRendererEx1(SimpleViewer viewer)
 	{
 		super(viewer);
-	}
-	
+	}	
+
 	//- PUBLIC METHOD ----------------------------------------------------------
 	// サンプルコードの概要説明を取得する．
 	//
 	public String getDescription()
 	{
 		return	DESCRIPTION;
-	}		
+	}
 	
 //------------------------------------------------------------------------------
 //  PROTECTED METHOD:
 //------------------------------------------------------------------------------
-
+	
 	//- PROTECTED METHOD -------------------------------------------------------
 	// SegmentIo の入力を構成する．
 	//
 	protected void configureInput(SegmentIo segIo)
 		throws	IOException
 	{
-		// 受信ストリームで SegmentIo の入力を構成する．
-		this.cfgTool.configureIncomingStream(segIo);
+		// 入力デバイスで SegmentIo の入力を構成する．
+		this.cfgTool.configureInputDevice(segIo);
 			// IOException	
 	}
 	
@@ -122,8 +122,8 @@ public class StreamToStreamEx1
 	protected void configureOutput(SegmentIo segIo)
 		throws	IOException
 	{
-		// 送信ストリームで SegentIo の出力を構成する．
-		this.cfgTool.configureOutgoingStream(segIo);
+		// デフォルトレンダラで SegmentIo の出力を構成する．
+		this.cfgTool.configureDefaultRenderer(segIo);	
 			// IOException	
-	}
+	}	
 }

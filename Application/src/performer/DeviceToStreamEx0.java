@@ -1,24 +1,21 @@
 
-package performer.ex0;
-
-import java.io.IOException;
-import java.util.List;
+package performer;
 
 import com.midfield_system.api.stream.ConnectionMode;
+import com.midfield_system.api.stream.DeviceInfo;
+import com.midfield_system.api.stream.DeviceInfoManager;
 import com.midfield_system.api.stream.ProtocolType;
 import com.midfield_system.api.stream.SegmentIo;
-import com.midfield_system.api.stream.StreamInfoManager;
 import com.midfield_system.api.stream.StreamPerformer;
 import com.midfield_system.api.system.MfsNode;
-import com.midfield_system.protocol.StreamInfo;
 
 import util.LineReader;
 import util.SimpleViewer;
 
 // Sample code of MidField System API
-// Date Modified: 2020.10.02
+// Date Modified: 2020.10.01
 //
-public class StreamToStreamEx0
+public class DeviceToStreamEx0
 {
 	public static void main(String[] args)
 	{
@@ -31,19 +28,16 @@ public class StreamToStreamEx0
 			mfs = MfsNode.initialize();		// SystemException
 			mfs.activate();					// SystemException
 			
-			// 送信ホスト名/IPアドレスをコマンドラインから取得する．
-			String srcAddr = LineReader.readLine("  送信ホスト名/IPアドレス：");	// IOException
+			// ビデオとオーディオの入力デバイス情報リストを取得し，
+			// 利用する入力デバイスを選択する．（ここでは最初の要素を選択する．）
+			DeviceInfoManager devInfMgr = DeviceInfoManager.getInstance();
+			DeviceInfo vidDev = devInfMgr.getInputVideoDeviceInfoList().get(0);
+			DeviceInfo audDev = devInfMgr.getInputAudioDeviceInfoList().get(0);
 			
-			// ストリーム情報リストを送信ホストから取得する．
-			StreamInfoManager stmInfMgr = StreamInfoManager.getInstance();
-			List<StreamInfo> lsStmInf = stmInfMgr.fetchSourceStreamInfoList(srcAddr);
-			if (lsStmInf.size() <= 0) {
-				throw new IOException("  ※受信可能なストリームがありません．");
-			}
-			// ストリーム情報（ここでは最初の要素を選択）で SegmentIo の入力を構成する．
+			// 入力デバイスで SegmentIo の入力を構成する．
 			SegmentIo segIo = new SegmentIo();
-			segIo.configureIncomingStream(lsStmInf.get(0));	
-		
+			segIo.configureInputDevice(vidDev, audDev);
+			
 			// SegmentIo の出力を送信ストリームとして構成し，
 			// トランスポートプロトコルの設定を行う．
 			segIo.configureOutgoingStream(
@@ -57,12 +51,12 @@ public class StreamToStreamEx0
 			// オプションの設定をする．
 			segIo.setPreviewer();		// プレビューワ―を利用する．
 			segIo.setLiveSource(true);	// ライブソースオプションを有効にする．	
-			
+
 			// SegmentIo をもとに StreamPerformer を生成する．
 			pfmr = StreamPerformer.newInstance(segIo);	// SystemException, StreamException
 
 			// StreamPerformer から VideoCanvas を取得し，SimpleViewer に追加する．
-			viewer = new SimpleViewer("StreamToStream", pfmr.getVideoCanvas());
+			viewer = new SimpleViewer("DeviceToStream", pfmr.getVideoCanvas());
 
 			// 入出力処理を開始する．
 			pfmr.open();	// StreamException

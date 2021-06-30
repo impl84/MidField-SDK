@@ -7,9 +7,9 @@ import com.midfield_system.api.stream.StreamException;
 import com.midfield_system.api.system.MfsNode;
 import com.midfield_system.api.system.SystemException;
 
-import performer.ex1.AbstractSampleCode;
-import performer.ex1.DeviceToStreamEx1;
-import performer.ex1.StreamToRendererEx1;
+import selector.AbstractSampleCode;
+import selector.DeviceToStreamEx1;
+import selector.StreamToRendererEx1;
 import util.LineReader;
 import util.SimpleViewer;
 

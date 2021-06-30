@@ -1,5 +1,5 @@
 
-package performer.ex0;
+package performer;
 
 import com.midfield_system.api.stream.DeviceInfo;
 import com.midfield_system.api.stream.DeviceInfoManager;

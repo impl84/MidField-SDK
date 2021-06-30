@@ -1,5 +1,5 @@
 
-package performer.ex1;
+package selector;
 
 import java.io.IOException;
 
@@ -11,19 +11,19 @@ import util.SimpleViewer;
 
 //------------------------------------------------------------------------------
 /**
- * Sample code of MidField System API: DeviceToStreamEx1
+ * Sample code of MidField System API: StreamToStreamEx1
  *
  * Date Modified: 2020.10.02
  *
  */
 
 //==============================================================================
-public class DeviceToStreamEx1
+public class StreamToStreamEx1
 	extends	AbstractSampleCode
 {
 	//- PRIVATE CONSTANT VALUE -------------------------------------------------
 	private static final String
-		DESCRIPTION	= "Device -> Outgoing Stream";
+		DESCRIPTION	= "Incoming Stream -> Outgoing Stream";
 	
 //==============================================================================
 //  CLASS METHOD:
@@ -50,7 +50,7 @@ public class DeviceToStreamEx1
 			viewer = new SimpleViewer(DESCRIPTION);
 			
 			// AbstractSampleCode のインスタンスを生成して処理を開始する．
-			sample = new DeviceToStreamEx1(viewer);
+			sample = new StreamToStreamEx1(viewer);
 			sample.startup();			// SystemException, StreamException
 			
 			// Enterキーの入力を待つ．
@@ -84,11 +84,11 @@ public class DeviceToStreamEx1
 //------------------------------------------------------------------------------
 //  PUBLIC METHOD:
 //------------------------------------------------------------------------------	
-
+	
 	//- PUBLIC METHOD ----------------------------------------------------------
 	// コンストラクタ
 	//
-	public DeviceToStreamEx1(SimpleViewer viewer)
+	public StreamToStreamEx1(SimpleViewer viewer)
 	{
 		super(viewer);
 	}
@@ -99,21 +99,21 @@ public class DeviceToStreamEx1
 	public String getDescription()
 	{
 		return	DESCRIPTION;
-	}	
+	}		
 	
 //------------------------------------------------------------------------------
 //  PROTECTED METHOD:
 //------------------------------------------------------------------------------
-	
+
 	//- PROTECTED METHOD -------------------------------------------------------
 	// SegmentIo の入力を構成する．
 	//
 	protected void configureInput(SegmentIo segIo)
 		throws	IOException
 	{
-		// 入力デバイスで SegmentIo の入力を構成する．
-		this.cfgTool.configureInputDevice(segIo);
-			// IOException
+		// 受信ストリームで SegmentIo の入力を構成する．
+		this.cfgTool.configureIncomingStream(segIo);
+			// IOException	
 	}
 	
 	//- PROTECTED METHOD -------------------------------------------------------

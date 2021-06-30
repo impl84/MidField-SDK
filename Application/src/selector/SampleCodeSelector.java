@@ -7,11 +7,6 @@ import com.midfield_system.api.stream.StreamException;
 import com.midfield_system.api.system.MfsNode;
 import com.midfield_system.api.system.SystemException;
 
-import performer.ex1.AbstractSampleCode;
-import performer.ex1.DeviceToRendererEx1;
-import performer.ex1.DeviceToStreamEx1;
-import performer.ex1.StreamToRendererEx1;
-import performer.ex1.StreamToStreamEx1;
 import util.LineReader;
 import util.SimpleViewer;
 
@@ -19,12 +14,12 @@ import util.SimpleViewer;
 /**
  * Sample code of MidField System API: SampleCodeSelector
  *
- * Date Modified: 2020.10.05
+ * Date Modified: 2021.06.30
  *
  */
 
 //==============================================================================
-public class SampleCodeSelector
+class SampleCodeSelector
 {
 	//- PRIVATE CONSTANT VALUE -------------------------------------------------
 	private static final int
@@ -51,12 +46,12 @@ public class SampleCodeSelector
 //==============================================================================
 	
 //------------------------------------------------------------------------------
-//  PUBLIC METHOD:
+//  PACKAGE METHOD:
 //------------------------------------------------------------------------------
 
-	//- PUBLIC METHOD ----------------------------------------------------------
+	//- PACKAGE METHOD ---------------------------------------------------------
 	//
-	public SampleCodeSelector()
+	SampleCodeSelector()
 		throws	SystemException
 	{
 		// MidField System を初期化する．
@@ -79,9 +74,9 @@ public class SampleCodeSelector
 		};
 	}
 	
-	//- PUBLIC METHOD ----------------------------------------------------------
-	//	
-	public void mainLoop()
+	//- PACKAGE METHOD ---------------------------------------------------------
+	//
+	void mainLoop()
 	{
 		// サンプルコードを選択し，開始または停止を繰り返す．
 		while (true) {
@@ -103,9 +98,9 @@ public class SampleCodeSelector
 		}
 	}
 	
-	//- PUBLIC METHOD ----------------------------------------------------------
-	//	
-	public void cleanup()
+	//- PACKAGE METHOD ---------------------------------------------------------
+	//
+	void cleanup()
 	{
 		// MidField System を利用しているかどうかを確認する．
 		if (this.mfs == null) {
